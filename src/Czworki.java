@@ -19,6 +19,9 @@ public class Czworki {
 	public int state=0;
 	public Highscores hs = new Highscores();
 	private static MongoCollection steps;
+	
+	public Czworki() {};
+	
 	public String[][] Setup(int x, int y) throws ClassNotFoundException, IOException {
 		String[][] plansza= new String[x][y];
 		for(int i = 0; i < x; i++) {

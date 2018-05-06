@@ -25,7 +25,7 @@ class HighscoresTest {
 	    System.setOut(System.out);
 	    System.setErr(System.err);
 	}
-
+	/*
 	@Test
 	public void testHighscoreRead() throws ClassNotFoundException, IOException {
 		Highscores hs = new Highscores();
@@ -33,7 +33,7 @@ class HighscoresTest {
 		int actual = hs.highScores.get("testWrite");
 		assertEquals(1, actual);
 	}
-	
+	*/
 	@Test
 	public void testHighscoreReadNoFile() {
 		assertThrows(IOException.class,
