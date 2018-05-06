@@ -128,11 +128,8 @@ public class Czworki {
 		int round = 0;
 		Move step = new Move();
 		
-		@SuppressWarnings({ "deprecation", "resource" })
-		DB db = new MongoClient().getDB("dbname");
-		Jongo jongo = new Jongo(db);
-		
-		jongo.getCollection("steps").drop();
+		MongoDB db = new MongoDB();
+		db.delete();
 		
 		System.out.println("-Podaj wielkość planszy- \nWysokość: ");
 		ChooseHeight();
@@ -157,8 +154,8 @@ public class Czworki {
 			Print(plansza);
 			// i+1 - player ; 
 			for(int i=0;i<2;i++) {
-				round++;
 				if(state == 0) {
+					
 					System.out.println("\n\nRuch "+	(i+1) +" gracza, podaj kolumne: (1-"+width+")");
 					try {
 					move = sc.nextInt();
@@ -175,7 +172,6 @@ public class Czworki {
 						System.out.println("Ruch może się odbyć od kolumny 1 do "+width+" uzywajac jedynie cyfr!");
 					}
 					Print(plansza);
-					
 					if(state != 0) {
 						if(state == 1) {
 							if(i==0)
@@ -188,15 +184,16 @@ public class Czworki {
 						continue;
 					}
 				}
-				step = new Move(i+1, posx, posy, round, color);
-				
+
+				round++;
 				if(color == 'x')
 					color = 'o';
 				else
 					color = 'x';
 				
-			 	steps = jongo.getCollection("steps");
-		        steps.save(step);
+				step = new Move(i+1, posx, posy, round, color);
+				
+			 	db.insert(step);
 				
 			}
 		}

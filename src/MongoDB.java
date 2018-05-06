@@ -2,23 +2,20 @@ import java.rmi.UnknownHostException;
 import java.util.Collections;
 import java.util.List;
 
+
 public class MongoDB {
 
 	  
-    private IMoveService service;
+    public IMoveService service;
      
-    public MongoDB() throws java.net.UnknownHostException{
-        connectDb();
+    public MongoDB() throws java.net.UnknownHostException {
+    	
+      service = new MoveCollection();
     }
    
     public MongoDB(FakeMovesCollection fake) {
     	
         service = fake;
-    }
-   
-    public void connectDb() throws java.net.UnknownHostException {
-    	
-            service = new MoveCollection();
     }
    
     public List<Move> getAll() {
@@ -48,10 +45,12 @@ public class MongoDB {
    
 	
     public Move getFirst() {
+    	
 		return service.getFirst();
 	}
 	
     public Move getLast() {
+    	
     	return service.getLast();
 	}
 }

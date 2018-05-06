@@ -11,6 +11,7 @@ public class FakeMovesCollection implements IMoveService {
 	}
 	@Override
 	public List<Move> getAll() {
+		
 		if(moves.size() == 0) 
 			throw new IllegalArgumentException();
 		else

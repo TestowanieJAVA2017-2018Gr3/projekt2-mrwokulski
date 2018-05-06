@@ -12,13 +12,14 @@ import com.mongodb.MongoClient;
 
 public class MoveCollection implements IMoveService {
 
-	private MongoCollection moves;
+	public MongoCollection moves;
 		
 	public MoveCollection () throws UnknownHostException {
 		@SuppressWarnings({ "deprecation", "resource" })
 		DB db = new MongoClient().getDB("steps");
 		moves = new Jongo(db).getCollection("steps");
 	}
+	
 	@Override
 	public List<Move> getAll() {
 		List<Move> all = new ArrayList<Move>();
@@ -40,6 +41,7 @@ public class MoveCollection implements IMoveService {
 
 	@Override
 	public void insert(Move move) {
+		
 		if(move._pos_x < 0) 
 			throw new IllegalArgumentException("Wrong posx.");
 		else if(move._pos_y < 0) 
