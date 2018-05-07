@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -40,7 +41,7 @@ public class Mockito {
 	@InjectMocks
 	MongoDB moves = new MongoDB(fakes);
 	
-/*
+	@Disabled
 	@Test
 	public void mockingWorksAsExpected (){
 		Move movess=mock(Move.class);	
@@ -48,7 +49,7 @@ public class Mockito {
 		doReturn(movess).when(move).getOne(1);
 		assertThat(moves.getOne(1)).isEqualTo(movess);
 	}
-	*/
+	
 	@Test
 	public void TestGetAll_ReturnCorrectList() {
 		
