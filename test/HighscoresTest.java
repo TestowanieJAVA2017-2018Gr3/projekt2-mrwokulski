@@ -86,6 +86,5 @@ class HighscoresTest {
 		int actual = gra.hs.highScores.get(name);
 		//Assert
 		assertEquals(expected, actual);
-	}
-*/
+	}*/
 }
