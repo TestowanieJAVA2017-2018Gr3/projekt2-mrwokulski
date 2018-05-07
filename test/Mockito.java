@@ -40,15 +40,7 @@ public class Mockito {
 	
 	@InjectMocks
 	MongoDB moves = new MongoDB(fakes);
-	
-	@Disabled
-	@Test
-	public void mockingWorksAsExpected (){
-		Move movess=mock(Move.class);	
-		
-		doReturn(movess).when(move).getOne(1);
-		assertThat(moves.getOne(1)).isEqualTo(movess);
-	}
+
 	
 	@Test
 	public void TestGetAll_ReturnCorrectList() {
