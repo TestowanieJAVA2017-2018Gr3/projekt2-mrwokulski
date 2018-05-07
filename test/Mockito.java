@@ -26,7 +26,8 @@ import org.mockito.stubbing.Answer;
 @RunWith(MockitoJUnitRunner.class)
 public class Mockito {
 	
-	List<Move> steps = mock(List.class);	
+	List<Move> steps = mock(List.class);
+	FakeMovesCollection fakes;
 	int player;
 	int pos_x;
 	int pos_y;
@@ -37,7 +38,7 @@ public class Mockito {
 	MoveCollection move;
 	
 	@InjectMocks
-	MongoDB moves;
+	MongoDB moves = new MongoDB(fakes);
 	
 
 	@Test
@@ -46,7 +47,7 @@ public class Mockito {
 		Move movess=  mock(Move.class);	
 		
 		doReturn(movess).when(move).getOne(1);
-		assertThat(move.getOne(1)).isEqualTo(movess);
+		assertThat(moves.getOne(1)).isEqualTo(movess);
 	}
 	
 	@Test
@@ -62,7 +63,7 @@ public class Mockito {
 		correctList.add(step3);
 		doReturn(correctList).when(move).getAll();
 
-		assertThat(move	.getAll()).isEqualTo(correctList);
+		assertThat(moves.getAll()).isEqualTo(correctList);
 	}
 	
 	@Test
@@ -72,7 +73,7 @@ public class Mockito {
 		
 		doReturn(expected).when(move).getAll();
 		
-		assertThat(move.getAll()).isEqualTo(expected);
+		assertThat(moves.getAll()).isEqualTo(expected);
 	}
 	
 	@Test
@@ -82,7 +83,7 @@ public class Mockito {
 		
 		move.insert(step);
 		doReturn(step).when(move).getOne(100);
-		assertThat(move.getOne(100)._round).isEqualTo(step._round);
+		assertThat(moves.getOne(100)._round).isEqualTo(step._round);
 	}
 	
 	@Test
@@ -92,7 +93,7 @@ public class Mockito {
 		move.insert(step);
 		
 		doReturn(step).when(move).getOne(100);
-		assertNotNull(move.getOne(100));
+		assertNotNull(moves.getOne(100));
 		
 	}
 	
@@ -103,7 +104,7 @@ public class Mockito {
 		move.insert(step);
 		
 		doReturn(step).when(move).getOne(100);
-		assertThat(move.getOne(100)).isEqualTo(step);
+		assertThat(moves.getOne(100)).isEqualTo(step);
 	}
 	
 	@Test
@@ -118,7 +119,7 @@ public class Mockito {
 		correctList.add(step3);
 		doReturn(step1).when(move).getFirst();
 
-		assertThat(move.getFirst()).isEqualTo(step1);
+		assertThat(moves.getFirst()).isEqualTo(step1);
 	}
 	
 	@Test
@@ -133,6 +134,6 @@ public class Mockito {
 		correctList.add(step3);
 		doReturn(step3).when(move).getLast();
 
-		assertThat(move.getLast()).isEqualTo(step3);
+		assertThat(moves.getLast()).isEqualTo(step3);
 	}
 }

@@ -5,6 +5,9 @@ public class FakeMovesCollection implements IMoveService {
 	
 	
 	List<Move> moves;
+	boolean returned = false;
+	boolean inserted = false;
+	boolean deleted = false;
 	
 	public FakeMovesCollection() {
 		moves = new ArrayList<Move>();
@@ -14,10 +17,12 @@ public class FakeMovesCollection implements IMoveService {
 		
 		if(moves.size() == 0) 
 			throw new IllegalArgumentException();
-		else
+		else {
+			returned = true;
 			return moves;
+		}
 	}
-
+	
 	@Override
 	public Move getOne(int round) {
 		for(Move m : moves) {
@@ -33,13 +38,16 @@ public class FakeMovesCollection implements IMoveService {
 			throw new IllegalArgumentException("Wrong posx.");
 		else if(move._pos_y < 0) 
 			throw new IllegalArgumentException("Wrong posy.");
-		else 
+		else {
+			inserted = true;
 			moves.add(move);
 		
+		}
 	}
 
 	@Override
 	public void delete() {
+		deleted = true;
 		moves = null;
 	}
 
@@ -52,6 +60,18 @@ public class FakeMovesCollection implements IMoveService {
 	public Move getLast() {
 		int index = moves.size();
 		return moves.get(index-1);
+	}
+	
+	public boolean getReturned () {
+		return returned;
+	}
+	
+	public boolean getInserted () {
+		return inserted;
+	}
+	
+	public boolean getDeleted () {
+		return deleted;
 	}
 
 }
